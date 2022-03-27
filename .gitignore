@@ -46,4 +46,5 @@ app.*.map.json
 /android/app/release
 
 *.gr.dart
-AndroidManifest.xml
+*/AndroidManifest.xml
+/lib/presentation/credentials.dart
