@@ -3,5 +3,7 @@ import 'package:flutter/material.dart';
 import 'presentation/core/app_widget.dart';
 
 void main() {
-  runApp(const AppWidget());
+  runApp(
+    const AppWidget(),
+  );
 }
