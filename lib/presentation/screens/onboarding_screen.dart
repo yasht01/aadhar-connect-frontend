@@ -21,7 +21,7 @@ class OnboardingPage extends StatelessWidget {
               Image.asset('assets/images/aadhar_logo.png'),
             ],
           ),
-          CarouselWithIndicator(),
+          const CarouselWithIndicator(),
         ],
       ),
     );
