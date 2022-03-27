@@ -1,6 +1,6 @@
 name: sih_frontend
 description: App frontend for Aadhar Connect
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
@@ -12,6 +12,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   auto_route: ^3.2.4
   carousel_slider: ^4.0.0
+  google_maps_flutter: ^2.1.3
+  location: ^4.3.0
   email_validator: ^2.0.1
 
 dev_dependencies:
@@ -23,9 +25,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  
+
   assets:
-    - assets/images/aadhar_logo.png
+    - assets/images/
 
   fonts:
     - family: Rubik
