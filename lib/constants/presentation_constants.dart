@@ -7,4 +7,5 @@ const TextStyle kHeadlineTextStyle = TextStyle(
   fontSize: 30,
 );
 
-const Color kAccentColor = Colors.teal;
+const Color kEnabledColor = Colors.teal;
+const Color kDisabledColor = Colors.grey;
