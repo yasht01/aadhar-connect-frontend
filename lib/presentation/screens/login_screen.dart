@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:sih_frontend/global.dart';
+import 'package:sih_frontend/presentation/routes/app_routes.gr.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  final User? loginAs;
+  const LoginPage({Key? key, this.loginAs});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    User? currentUserRole = loginAs;
+
+    return Scaffold(
       body: Center(
-        child: Text('Onbarding Page'),
+        child: Text(
+            'You\'re logging in as ${currentUserRole == User.operator ? 'Operator' : 'Resident'}'),
       ),
     );
   }

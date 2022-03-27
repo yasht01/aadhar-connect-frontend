@@ -6,3 +6,5 @@ const TextStyle kHeadlineTextStyle = TextStyle(
   fontWeight: FontWeight.w600,
   fontSize: 30,
 );
+
+const Color kAccentColor = Colors.teal;
