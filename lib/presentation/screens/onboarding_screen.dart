@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:auto_route/src/router/auto_router_x.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:sih_frontend/global.dart';
 
 import '../routes/app_routes.gr.dart';
@@ -23,7 +23,7 @@ class OnboardingPage extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(2),
-                color: kAccentColor,
+                color: kEnabledColor,
               ),
               margin: const EdgeInsets.only(left: 20),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -57,6 +57,8 @@ class OnboardingPage extends StatelessWidget {
 }
 
 class CarouselWithIndicator extends StatefulWidget {
+  const CarouselWithIndicator({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _CarouselWithIndicatorState();
@@ -100,7 +102,8 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
               child: Container(
                 width: 12.0,
                 height: 12.0,
-                margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: (Theme.of(context).brightness == Brightness.dark
@@ -123,10 +126,10 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
 }
 
 class TransparentButton extends StatelessWidget {
-  IconData icon;
-  double size;
-  Function callback;
-  TransparentButton(
+  final IconData icon;
+  final double size;
+  final Function callback;
+  const TransparentButton(
       {Key? key,
       required this.icon,
       required this.size,
