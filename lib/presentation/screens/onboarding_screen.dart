@@ -7,6 +7,7 @@ import '../routes/app_routes.gr.dart';
 
 import '../../constants/presentation_constants.dart';
 
+
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({Key? key}) : super(key: key);
 
