@@ -10,6 +10,7 @@ class AppWidget extends StatelessWidget {
 
     return MaterialApp.router(
       title: 'Aadhar Connect',
+      theme: ThemeData(fontFamily: 'Rubik'),
       routeInformationParser: _appRouter.defaultRouteParser(),
       routerDelegate: _appRouter.delegate(),
     );
