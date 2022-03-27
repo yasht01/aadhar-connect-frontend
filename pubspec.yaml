@@ -12,6 +12,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   auto_route: ^3.2.4
   carousel_slider: ^4.0.0
+  email_validator: ^2.0.1
 
 dev_dependencies:
   flutter_test:

@@ -1,14 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:sih_frontend/constants/presentation_constants.dart';
 import 'package:sih_frontend/global.dart';
-import 'package:sih_frontend/presentation/routes/app_routes.gr.dart';
 import 'package:sih_frontend/presentation/shared_widgets/banner.dart';
 import 'package:sih_frontend/presentation/shared_widgets/pill_button.dart';
 
-class LoginPage extends StatelessWidget {
-  final User loginAs;
-  const LoginPage({Key? key, required this.loginAs}) : super(key: key);
+class AuthCodePage extends StatelessWidget {
+  final User?
+      loginAs; // TODO: To be passed on to decide the next screens (Resident or Operator)
+  const AuthCodePage({Key? key, this.loginAs}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +15,9 @@ class LoginPage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const CustomBanner(),
-            LoginForm(
-              loginAs: loginAs,
-            ),
+          children: const [
+            CustomBanner(),
+            LoginForm(),
           ],
         ),
       ),
@@ -29,8 +26,7 @@ class LoginPage extends StatelessWidget {
 }
 
 class LoginForm extends StatefulWidget {
-  final User loginAs;
-  const LoginForm({Key? key, required this.loginAs}) : super(key: key);
+  const LoginForm({Key? key}) : super(key: key);
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -38,16 +34,14 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   late GlobalKey<FormState> _formKey;
-  late GlobalKey<FormFieldState> _aadhaarKey;
-  Map<String, String?> _loginDetails = {
-    'aadhaar': null,
-  };
+  late GlobalKey<FormFieldState> _authFieldKey;
+  String? _authCode;
 
   @override
   void initState() {
     super.initState();
     _formKey = GlobalKey<FormState>();
-    _aadhaarKey = GlobalKey<FormFieldState>();
+    _authFieldKey = GlobalKey<FormFieldState>();
   }
 
   @override
@@ -70,12 +64,12 @@ class _LoginFormState extends State<LoginForm> {
             ),
             const SizedBox(height: 35.0),
             TextFormField(
-              key: _aadhaarKey,
-              onChanged: (value) => _aadhaarKey.currentState!.validate(),
+              key: _authFieldKey,
+              onChanged: (value) => _authFieldKey.currentState!.validate(),
               keyboardType: TextInputType.number,
               style: const TextStyle(fontSize: 20.0),
               decoration: InputDecoration(
-                hintText: 'Aadhaar Number',
+                hintText: 'OTP',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
                   borderSide: const BorderSide(
@@ -109,11 +103,12 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 ),
               ),
-              validator: (value) => _validateAadhaar(value),
+              validator: (value) => _validateOTP(value),
+              onEditingComplete: () => _submitForm(),
             ),
             const SizedBox(height: 25.0),
             PillButton(
-              text: 'Send OTP',
+              text: 'Login',
               onTap: _submitForm,
             ),
           ],
@@ -122,17 +117,12 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  String? _validateAadhaar(String? value) {
+  String? _validateOTP(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your Aadhaar Number';
-    }
-    if (value.length != 12) {
-      return 'Please enter a valid Aadhaar Number';
+      return 'Please enter the received OTP';
     }
 
-    _loginDetails = {
-      'aadhaar': value,
-    };
+    _authCode = value;
 
     return null;
   }
@@ -140,8 +130,7 @@ class _LoginFormState extends State<LoginForm> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       // TODO: Submit data to LoginBloc
-      print(_loginDetails);
-      context.router.popAndPush(AuthCodeRoute(loginAs: widget.loginAs));
+      print(_authCode);
     }
   }
 }

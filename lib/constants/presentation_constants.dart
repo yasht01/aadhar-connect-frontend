@@ -6,3 +6,6 @@ const TextStyle kHeadlineTextStyle = TextStyle(
   fontWeight: FontWeight.w600,
   fontSize: 30,
 );
+
+const Color kEnabledColor = Colors.teal;
+const Color kDisabledColor = Colors.grey;
