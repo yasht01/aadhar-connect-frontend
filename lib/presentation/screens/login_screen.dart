@@ -7,7 +7,7 @@ import 'package:sih_frontend/presentation/shared_widgets/banner.dart';
 import 'package:sih_frontend/presentation/shared_widgets/pill_button.dart';
 
 class LoginPage extends StatelessWidget {
-  final User loginAs;
+  final UserRole loginAs;
   const LoginPage({Key? key, required this.loginAs}) : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class LoginPage extends StatelessWidget {
 }
 
 class LoginForm extends StatefulWidget {
-  final User loginAs;
+  final UserRole loginAs;
   const LoginForm({Key? key, required this.loginAs}) : super(key: key);
 
   @override

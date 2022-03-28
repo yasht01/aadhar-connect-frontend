@@ -1,7 +1,5 @@
-import 'dart:async';
 import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:location/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sih_frontend/presentation/routes/app_routes.gr.dart';
@@ -16,30 +14,24 @@ class LocationPage extends StatefulWidget {
 }
 
 class LocationPageState extends State<LocationPage> {
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
+  static const CameraPosition _kInitialPos = CameraPosition(
+    target: LatLng(20.2958008485195, 85.74333664029837),
     zoom: 14.4746,
   );
 
-  static const CameraPosition _kLake = CameraPosition(
-    bearing: 192.8334901395799,
-    target: LatLng(37.43296265331129, -122.08832357078792),
-    tilt: 59.440717697143555,
-    zoom: 19.151926040649414,
-  );
+  // static const CameraPosition _kLake = CameraPosition(
+  //   bearing: 192.8334901395799,
+  //   target: LatLng(37.43296265331129, -122.08832357078792),
+  //   tilt: 59.440717697143555,
+  //   zoom: 19.151926040649414,
+  // );
 
   final location = Location();
   GoogleMapController? _controller;
 
-  getLocation() async {
+  getLocation(LatLng dynamicPos) async {
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
-    LocationData _locationData = LocationData.fromMap(
-      {
-        'latitude': 37.43296265331129,
-        'longitude': -122.08832357078792,
-      },
-    );
 
     _serviceEnabled = await location.serviceEnabled();
     if (!_serviceEnabled) {
@@ -57,34 +49,49 @@ class LocationPageState extends State<LocationPage> {
       }
     }
 
-    _locationData = await location.getLocation();
     location.onLocationChanged.listen((locationData) {
       _controller!.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
             target: LatLng(
-              _locationData.latitude!,
-              _locationData.longitude!,
+              dynamicPos.latitude,
+              dynamicPos.longitude,
             ),
-            zoom: 16,
+            zoom: 16.47,
           ),
         ),
       );
     });
   }
 
+  LatLng dynamicPos = const LatLng(
+    20.2958008485195,
+    85.74333664029837,
+  );
+
   @override
   void initState() {
-    setState(() {
-      getLocation();
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      final _locationData = await getUserLocation();
+      dynamicPos = LatLng(_locationData.latitude!, _locationData.longitude!);
+
+      setState(() {
+        getLocation(dynamicPos);
+      });
     });
+
     super.initState();
+  }
+
+  getUserLocation() async {
+    final _locationData = await location.getLocation();
+    return _locationData;
   }
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    LatLng? dynamicPos;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -104,14 +111,20 @@ class LocationPageState extends State<LocationPage> {
               ),
               GoogleMap(
                 mapType: MapType.normal,
-                initialCameraPosition: _kGooglePlex,
+                initialCameraPosition: _kInitialPos,
                 zoomControlsEnabled: false,
-                onCameraIdle: () {},
+                onCameraIdle: () {
+                  setState(() {
+                    getLocation(dynamicPos);
+                  });
+                },
                 onCameraMove: (pos) {
                   dynamicPos = pos.target;
+
                   print(
-                      'Dynamic position: ${dynamicPos!.latitude}: ${dynamicPos!.longitude}');
+                      'Dynamic position: ${dynamicPos.latitude}: ${dynamicPos.longitude}');
                 },
+                zoomGesturesEnabled: true,
                 markers: {
                   const Marker(
                     markerId: MarkerId("center-current-location"),
@@ -133,7 +146,7 @@ class LocationPageState extends State<LocationPage> {
                 left: screenSize.width / 2,
                 top: screenSize.height / 2,
               ),
-              Positioned(
+              const Positioned(
                 bottom: 0,
                 child: AddressSheet(
                   address: 'Gothapatna, Malipada, Bhubaneswar, Odisha - 751003',
@@ -146,7 +159,7 @@ class LocationPageState extends State<LocationPage> {
     );
   }
 
-  Future<void> _goToTheLake() async {
-    _controller!.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  }
+  // Future<void> _goToTheLake() async {
+  //   _controller!.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+  // }
 }

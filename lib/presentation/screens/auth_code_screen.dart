@@ -7,8 +7,7 @@ import 'package:sih_frontend/presentation/shared_widgets/banner.dart';
 import 'package:sih_frontend/presentation/shared_widgets/pill_button.dart';
 
 class AuthCodePage extends StatelessWidget {
-  final User?
-      loginAs; // TODO: To be passed on to decide the next screens (Resident or Operator)
+  final UserRole? loginAs;
   const AuthCodePage({Key? key, this.loginAs}) : super(key: key);
 
   @override
@@ -17,9 +16,9 @@ class AuthCodePage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            CustomBanner(),
-            LoginForm(),
+          children: [
+            const CustomBanner(),
+            LoginForm(loginAs: loginAs),
           ],
         ),
       ),
@@ -28,8 +27,8 @@ class AuthCodePage extends StatelessWidget {
 }
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({Key? key}) : super(key: key);
-
+  const LoginForm({Key? key, this.loginAs}) : super(key: key);
+  final UserRole? loginAs;
   @override
   State<LoginForm> createState() => _LoginFormState();
 }
@@ -131,8 +130,8 @@ class _LoginFormState extends State<LoginForm> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // TODO: Submit data to LoginBloc
-      print(_authCode);
+      Global.initUser();
+      Global.setCurrentUserRole = widget.loginAs!;
       context.router.push(const LocationRoute());
     }
   }

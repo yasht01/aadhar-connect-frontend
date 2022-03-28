@@ -7,7 +7,6 @@ import '../routes/app_routes.gr.dart';
 
 import '../../constants/presentation_constants.dart';
 
-
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({Key? key}) : super(key: key);
 
@@ -36,7 +35,7 @@ class OnboardingPage extends StatelessWidget {
             TextButton(
                 onPressed: () {
                   context.router.push(LoginRoute(
-                    loginAs: User.resident,
+                    loginAs: UserRole.resident,
                   ));
                 },
                 child: const Text('Login as Resident')),
@@ -44,7 +43,7 @@ class OnboardingPage extends StatelessWidget {
               onPressed: () {
                 context.router.push(
                   LoginRoute(
-                    loginAs: User.operator,
+                    loginAs: UserRole.operator,
                   ),
                 );
               },
@@ -117,7 +116,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
           }).toList(),
         ),
         TransparentButton(
-          callback: () => context.router.push(const HomeRoute()),
+          callback: () => context.router.push(const LocationRoute()),
           icon: Icons.east,
           size: 60,
         ),
