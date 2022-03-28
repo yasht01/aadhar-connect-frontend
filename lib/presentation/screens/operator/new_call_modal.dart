@@ -1,6 +1,6 @@
-import 'package:auto_route/src/router/auto_router_x.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
-import 'package:maps_launcher/maps_launcher.dart';
 import 'package:sih_frontend/constants/presentation_constants.dart';
 import 'package:sih_frontend/presentation/shared_widgets/pill_button.dart';
 
@@ -38,8 +38,7 @@ class NewCallModalPage extends StatelessWidget {
               context.router.pop({
                 'call': 'accepted',
               });
-              MapsLauncher.launchQuery(
-                  '1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA');
+              launchURL(); // TODO: Make it dynamic
             },
           ), // To Google Maps app
           PillButton(
@@ -52,5 +51,19 @@ class NewCallModalPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  launchURL() async {
+    const url =
+        'https://www.google.com/maps/dir/?api=1&origin=20.2864451,85.8332186&destination=20.2945161,85.7428483&travelmode=driving&dir_action=navigate';
+
+    final String encodedURl = Uri.encodeFull(url);
+
+    if (await canLaunch(encodedURl)) {
+      await launch(encodedURl);
+    } else {
+      print('Could not launch $encodedURl');
+      throw 'Could not launch $encodedURl';
+    }
   }
 }
