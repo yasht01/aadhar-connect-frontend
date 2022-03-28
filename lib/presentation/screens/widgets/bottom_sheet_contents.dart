@@ -4,12 +4,12 @@ import 'package:sih_frontend/presentation/routes/app_routes.gr.dart';
 import 'package:sih_frontend/presentation/shared_widgets/pill_button.dart';
 
 class BottomSheetContent extends StatefulWidget {
-  bool? biometricUpdate = false;
-  bool? biometricReg = false;
-  bool? demographicsUpdate = false;
-  bool? demographicsReg = false;
-  bool? other = false;
-  BottomSheetContent(
+  final bool? biometricUpdate;
+  final bool? biometricReg;
+  final bool? demographicsUpdate;
+  final bool? demographicsReg;
+  final bool? other;
+  const BottomSheetContent(
       {Key? key,
       this.biometricReg,
       this.biometricUpdate,
@@ -84,17 +84,7 @@ class _BottomSheetContentState extends State<BottomSheetContent> {
             text: 'Send Request',
             onTap: () {
               Navigator.pop(context, true);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  duration: Duration(seconds: 1),
-                  content: Text(
-                      'Request sent successfully. Please check your inbox for OTP'),
-                ),
-              );
-
-              Future.delayed(const Duration(seconds: 2))
-                  .then((value) => context.router.push(const HomeRoute()));
-            },
+                   },
           ),
         ],
       ),

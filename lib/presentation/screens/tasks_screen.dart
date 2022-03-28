@@ -57,7 +57,7 @@ class _TasksPageState extends State<TasksPage> {
 
   Future<bool> confirmationBottomSheet() async {
     bool x = false;
-    await showModalBottomSheet(
+    x = await showModalBottomSheet(
       context: context,
       builder: (ctx) => BottomSheetContent(
         biometricReg: biometricReg,
@@ -121,7 +121,19 @@ class _TasksPageState extends State<TasksPage> {
       floatingActionButton: PillButton(
         text: 'Confirm Request',
         onTap: () async {
-          await confirmationBottomSheet();
+          final x = await confirmationBottomSheet();
+          if (x) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                duration: Duration(seconds: 5),
+                content: Text(
+                    'Request sent successfully. Please check your inbox for OTP'),
+              ),
+            );
+
+            Future.delayed(const Duration(seconds: 2))
+                .then((value) => context.router.push(const HomeRoute()));
+          }
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
