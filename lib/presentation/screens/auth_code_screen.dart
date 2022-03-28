@@ -1,6 +1,8 @@
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:sih_frontend/constants/presentation_constants.dart';
 import 'package:sih_frontend/global.dart';
+import 'package:sih_frontend/presentation/routes/app_routes.gr.dart';
 import 'package:sih_frontend/presentation/shared_widgets/banner.dart';
 import 'package:sih_frontend/presentation/shared_widgets/pill_button.dart';
 
@@ -131,6 +133,7 @@ class _LoginFormState extends State<LoginForm> {
     if (_formKey.currentState!.validate()) {
       // TODO: Submit data to LoginBloc
       print(_authCode);
+      context.router.push(const LocationRoute());
     }
   }
 }

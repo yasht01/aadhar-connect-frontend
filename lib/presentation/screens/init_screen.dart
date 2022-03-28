@@ -21,6 +21,7 @@ class InitPage extends StatelessWidget {
               const SizedBox(height: 40),
               PillButton(
                 text: 'Login as Resident',
+                visible: true,
                 onTap: () {
                   context.router.push(
                     LoginRoute(
@@ -30,6 +31,7 @@ class InitPage extends StatelessWidget {
                 },
               ),
               PillButton(
+                visible: true,
                 onTap: () {
                   context.router.push(
                     LoginRoute(
