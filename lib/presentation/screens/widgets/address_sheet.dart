@@ -1,4 +1,6 @@
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
+import 'package:sih_frontend/presentation/routes/app_routes.gr.dart';
 
 class AddressSheet extends StatefulWidget {
   String? address;
@@ -40,7 +42,10 @@ class _AddressSheetState extends State<AddressSheet> {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            // TODO: Change Route for Resident and Operator (Using operator for testing)
+            context.router.push(OperatorHomeRoute());
+          },
           child: const Text(
             'Submit',
             style: TextStyle(color: Colors.white),

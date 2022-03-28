@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:location/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sih_frontend/presentation/routes/app_routes.gr.dart';
 import 'package:sih_frontend/presentation/screens/widgets/address_sheet.dart';
+import 'package:sih_frontend/presentation/shared_widgets/pill_button.dart';
 
 class LocationPage extends StatefulWidget {
   const LocationPage({Key? key}) : super(key: key);
@@ -90,6 +93,15 @@ class LocationPageState extends State<LocationPage> {
             constraints:
                 BoxConstraints.tight(Size(screenSize.width, screenSize.height)),
             child: Stack(children: [
+              Positioned(
+                top: 25,
+                left: 25,
+                child: PillButton(
+                  width: 150,
+                  text: 'Confirm Location',
+                  onTap: () => context.router.popAndPush(const InitRoute()),
+                ),
+              ),
               GoogleMap(
                 mapType: MapType.normal,
                 initialCameraPosition: _kGooglePlex,
@@ -127,13 +139,8 @@ class LocationPageState extends State<LocationPage> {
                   address: 'Gothapatna, Malipada, Bhubaneswar, Odisha - 751003',
                 ),
               ),
-              
             ]),
           ),
-
-          // AddressSheet(
-          //   address: 'This is an address',
-          // ),
         ],
       ),
     );

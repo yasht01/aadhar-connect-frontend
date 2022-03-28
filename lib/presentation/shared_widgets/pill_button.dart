@@ -7,6 +7,7 @@ class PillButton extends StatelessWidget {
   final bool isEnabled;
   final EdgeInsets? margin;
   final double? width;
+  final bool? visible;
 
   const PillButton({
     Key? key,
@@ -15,18 +16,19 @@ class PillButton extends StatelessWidget {
     this.isEnabled = true,
     this.margin,
     this.width,
+    this.visible = true
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return (visible != null && visible == true) ? Container(
       margin: margin ??
           const EdgeInsets.symmetric(
             vertical: 6.0,
             horizontal: 12.0,
           ),
       child: SizedBox(
-        width: double.infinity,
+        width: width ?? double.infinity,
         height: 52,
         child: ElevatedButton(
           child: Text(
@@ -52,6 +54,6 @@ class PillButton extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ) : const SizedBox();
   }
 }
