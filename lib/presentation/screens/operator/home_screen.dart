@@ -1,12 +1,14 @@
 import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sih_frontend/constants/presentation_constants.dart';
 import 'package:sih_frontend/presentation/routes/app_routes.gr.dart';
 import 'package:sih_frontend/presentation/screens/operator/new_call_modal.dart';
 import 'package:sih_frontend/presentation/shared_widgets/pill_button.dart';
 
 class OperatorHomePage extends StatefulWidget {
-  const OperatorHomePage({Key? key}) : super(key: key);
+  final LatLng? originCoor;
+  const OperatorHomePage({Key? key, this.originCoor}) : super(key: key);
 
   @override
   State<OperatorHomePage> createState() => _OperatorHomePageState();
@@ -80,7 +82,8 @@ class _OperatorHomePageState extends State<OperatorHomePage> {
             text: 'Enter OTP',
             visible: _notifyUser,
             width: 150,
-            onTap: () => context.router.push(const VerifyAuthCodeRoute()), // Go to OTP Screen
+            onTap: () => context.router
+                .push(const VerifyAuthCodeRoute()), // Go to OTP Screen
           ),
         ],
       ),

@@ -1,6 +1,8 @@
 import 'package:sih_frontend/global.dart';
 
 class UserModel {
-  User? isOperator;
+  UserRole? userRole;
   String? adhaar;
 }
+
+class AadhaarServices {}

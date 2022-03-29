@@ -25,7 +25,7 @@ class InitPage extends StatelessWidget {
                 onTap: () {
                   context.router.push(
                     LoginRoute(
-                      loginAs: User.resident,
+                      loginAs: UserRole.resident,
                     ),
                   );
                 },
@@ -35,7 +35,7 @@ class InitPage extends StatelessWidget {
                 onTap: () {
                   context.router.push(
                     LoginRoute(
-                      loginAs: User.operator,
+                      loginAs: UserRole.operator,
                     ),
                   );
                 },

@@ -3,6 +3,7 @@ import 'package:sih_frontend/presentation/screens/auth_code_screen.dart';
 import 'package:sih_frontend/presentation/screens/operator/home_screen.dart';
 import 'package:sih_frontend/presentation/screens/operator/new_call_modal.dart';
 import 'package:sih_frontend/presentation/screens/operator/verify_auth_code_screen.dart';
+import 'package:sih_frontend/presentation/screens/tasks_screen.dart';
 
 import '../../presentation/screens/booked_screen.dart';
 import '../../presentation/screens/confirm_location_screen.dart';
@@ -27,7 +28,8 @@ import '../../presentation/screens/init_screen.dart';
     AutoRoute(page: AuthCodePage),
     AutoRoute(page: OperatorHomePage),
     AutoRoute(page: NewCallModalPage),
-    AutoRoute(page: VerifyAuthCodePage)
+    AutoRoute(page: VerifyAuthCodePage),
+    AutoRoute(page: TasksPage),
   ],
 )
 // extend the generated private router

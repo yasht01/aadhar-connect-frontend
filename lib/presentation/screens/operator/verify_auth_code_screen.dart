@@ -77,14 +77,13 @@ class _RoundedWithCustomCursorState extends State<RoundedWithCustomCursor> {
                   .closed
                   .then(
                     (value) => context.router.popAndPush(
-                      const OperatorHomeRoute(),
+                      OperatorHomeRoute(),
                     ),
                   );
               return null;
             } else {
               return 'Invalid OTP';
             }
-            ;
           },
           onClipboardFound: (value) {
             debugPrint('onClipboardFound: $value');
@@ -96,7 +95,7 @@ class _RoundedWithCustomCursorState extends State<RoundedWithCustomCursor> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                margin: EdgeInsets.only(bottom: 9),
+                margin: const EdgeInsets.only(bottom: 9),
                 width: 22,
                 height: 1,
                 color: focusedBorderColor,
