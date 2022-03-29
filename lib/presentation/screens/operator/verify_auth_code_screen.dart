@@ -77,7 +77,7 @@ class _RoundedWithCustomCursorState extends State<RoundedWithCustomCursor> {
                   .closed
                   .then(
                     (value) => context.router.popAndPush(
-                      const OperatorHomeRoute(),
+                      OperatorHomeRoute(),
                     ),
                   );
               return null;

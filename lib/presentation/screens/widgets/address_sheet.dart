@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/src/router/auto_router_x.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sih_frontend/global.dart';
 import 'package:sih_frontend/presentation/routes/app_routes.gr.dart';
 import 'package:sih_frontend/presentation/shared_widgets/pill_button.dart';
 
 class AddressSheet extends StatefulWidget {
   final String? address;
-  const AddressSheet({Key? key, this.address}) : super(key: key);
+  final LatLng? latLng;
+  const AddressSheet({Key? key, this.address, this.latLng}) : super(key: key);
 
   @override
   _AddressSheetState createState() => _AddressSheetState();
@@ -52,7 +54,8 @@ class _AddressSheetState extends State<AddressSheet> {
         PillButton(
           text: 'Submit',
           onTap: () => Global.currentUser!.userRole == UserRole.operator
-              ? context.router.push(const OperatorHomeRoute())
+              ? context.router
+                  .push(OperatorHomeRoute(originCoor: widget.latLng))
               : context.router.push(const HomeRoute()),
           width: 250,
           // style: TextStyle(color: Colors.white),
